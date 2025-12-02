@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background: #ffffff;
+        }
+        
+        .dashboard-header {
+            text-align: left;
+            margin-bottom: 40px;
+        }
+        
+        .dashboard-title {
+            font-size: 2.5rem;
+            color: #000000;
+            font-weight: 400;
+            margin-bottom: 10px;
+        }
+        
+        .tiles-container {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            max-width: 1000px;
+        }
+        
+        .tile {
+            background: #FFED00;
+            padding: 20px;
+            text-decoration: none;
+            color: #333;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            text-align: center;
+            min-height: 180px;
+        }
+        
+        .tile:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        .tile-image {
+            width: 100%;
+            height: 100%;
+            max-width: 80px;
+            max-height: 80px;
+            object-fit: contain;
+            flex: 1;
+        }
+        
+        .tile-title {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #333;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard-header">
+        <h1 class="dashboard-title">Quick Links</h1>
+    </div>
+
+    <div class="tiles-container" id="tilesContainer">
+        <!-- Tiles will be added here by JavaScript -->
+    </div>
+
+    <script>
+        console.log('Script is running!');
+        
+        const tiles = [
+            {
+                title: "Document Library",
+                url: "/sites/yoursite/documents",
+                image: "https://www.sartorius.com/resource/blob/1445958/c2256982bf2cc36c2bf3fafe4211f8b2/iguana-svg-225536--data.svg"
+            },
+            {
+                title: "Team Calendar",
+                url: "/sites/yoursite/calendar",
+                image: "https://cdn-icons-png.flaticon.com/512/747/747310.png"
+            },
+            {
+                title: "Project Tasks",
+                url: "/sites/yoursite/tasks",
+                image: "https://cdn-icons-png.flaticon.com/512/1827/1827933.png"
+            },
+            {
+                title: "Team Site",
+                url: "/sites/yoursite",
+                image: "https://cdn-icons-png.flaticon.com/512/681/681494.png"
+            }
+        ];
+
+        function createDashboard() {
+            console.log('Creating dashboard...');
+            const container = document.getElementById('tilesContainer');
+            
+            tiles.forEach(tile => {
+                const link = document.createElement('a');
+                link.href = tile.url;
+                link.className = 'tile';
+                
+                link.innerHTML = `
+                    <img src="${tile.image}" alt="${tile.title}" class="tile-image">
+                    <div class="tile-title">${tile.title}</div>
+                `;
+                
+                container.appendChild(link);
+            });
+            
+            console.log('Dashboard created!');
+        }
+
+        // Run when page loads
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', createDashboard);
+        } else {
+            createDashboard();
+        }
+    </script>
+</body>
+</html>
